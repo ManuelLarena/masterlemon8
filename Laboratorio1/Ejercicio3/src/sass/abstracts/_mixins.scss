@@ -1,0 +1,3 @@
+@mixin get-color($base-color, $value) {
+    background-color: darken($base-color, $value);
+}
