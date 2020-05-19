@@ -1,0 +1,94 @@
+.main-container {
+  background-color: map-get($base-colors, mainContainerColor);
+  padding: map-get($spaces, large);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    "card__img"
+    "card__body";
+  width: 100%;
+  background-color: map-get($base-colors, cardColor);
+
+  @include respond-to('medium') {
+    width: 50%;
+  }
+
+  @include respond-to('large') {
+    width: 33%;
+  }
+
+  @include respond-to('huge') {
+    width: 25%;
+  }
+
+  .card__img {
+    grid-area: card__img;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card__body {
+    grid-area: card__body;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "card__title"
+      "card__text"
+      "card__info"
+      "btn";
+    border: 1px solid map-get($base-colors, borderCardColor);
+    border-top: none;
+    padding: map-get($spaces, large) map-get($spaces, medium) map-get($spaces, medium);
+  }
+
+  .card__title {
+    grid-area: card__title;
+    font-size: map-get($font-sizes, large);
+    font-weight: 500;
+    margin: 0 0 map-get($spaces, large);
+  }
+
+  .card__text {
+    grid-area: card__text;
+    margin: 0 0 map-get($spaces, large);
+  }
+
+  .card__info {
+    grid-area: card__info;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin: 0 0 map-get($spaces, large);
+
+    dt {
+      flex: 0 1 auto;
+      font-weight: 600;
+    }
+
+    dd {
+      flex: 0 1 auto;
+      margin: 0 0 0 map-get($spaces, small);
+      color: map-get($base-colors, buttonColor);
+    }
+  }
+
+  .btn {
+    grid-area: btn;
+    background-color: map-get($base-colors, buttonColor);
+    color: map-get($base-colors, buttonTextColor);
+    border: none;
+    padding: map-get($spaces, medium);
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: map-get($font-sizes, medium);
+    outline: none;
+  }
+}

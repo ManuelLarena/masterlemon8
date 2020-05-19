@@ -1,0 +1,23 @@
+$breakpoints: (
+  'medium': (min-width: 768px),
+  'large': (min-width: 992px),
+  'huge': (min-width: 1200px),
+);
+
+$base-colors:(
+  buttonColor: #7bbe46,
+  mainContainerColor: #ededed,
+  cardColor: #ffffff,
+  borderCardColor: #cccccc,
+  buttonTextColor: #ffffff);
+
+$spaces: (
+  small: 0.25rem,
+  medium: 1rem,
+  large: 1.5rem,
+);
+
+$font-sizes: (
+  medium: 1.25rem,
+  large: 2rem,
+);
