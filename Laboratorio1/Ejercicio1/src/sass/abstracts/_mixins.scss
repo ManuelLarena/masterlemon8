@@ -1,0 +1,4 @@
+@mixin colors($color, $value) {
+    background-color: scale-color($color, $lightness: $value);
+    color: invert($color);
+}

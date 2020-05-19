@@ -1,0 +1,44 @@
+.container-1,
+.container-2,
+.container-3 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .box {
+    flex: 1 1 10%;
+    max-width: 10%;
+    height: 100px;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0.5rem;
+
+    &.base-color {
+      flex: 1 1 20%;
+      max-width: 20%;
+      height: 100px;
+    }
+  }
+}
+
+@each $layer, $color in $base-colors {
+  .#{$layer} {
+    .base-color {
+      background-color: $color;
+      color: #ffffff;
+    }
+    @for $i from 1 through 4 {
+      .darken-#{$i} {
+        @include colors($color,(-$variation * $i));
+      }
+      .lighten-#{$i} {
+        @include colors($color,($variation * $i));
+      }
+    }
+  }
+}
