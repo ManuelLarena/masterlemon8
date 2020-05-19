@@ -1,0 +1,24 @@
+$amountDark: 20;
+$amountLight: 40;
+$themes: (
+  warm: (
+    backgroundColor: #fe0000,
+    textColor: #333333,
+    borderColor: #999999,
+    mainFont: (Tahoma, sans-serif),
+    secondaryFont: ("Trebuchet MS", sans-serif),
+    boxShadow: -1rem 1rem 0.5rem 0 rgba(0, 0, 0, 0.75),
+    borderRadius: 0,
+    marginBottom: 2rem,
+  ),
+  cold: (
+    backgroundColor: #0000ff,
+    textColor: #000000,
+    borderColor: #999999,
+    mainFont: (Georgia, serif),
+    secondaryFont: (Times, serif),
+    boxShadow: 1rem 1rem 0.5rem 0 rgba(0, 0, 0, 0.75),
+    borderRadius: 0.5rem,
+    marginBottom: 2rem,
+  ),
+);
