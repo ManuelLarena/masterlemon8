@@ -31,7 +31,7 @@ class SlothMachine {
   }
 
   get chuck() {
-    let roulettesNum: number = 3;
+    const roulettesNum: number = 3;
     for (let index: number = 0; index < roulettesNum; index++) {
       this.roulettesResult[index] = !!Math.round(Math.random());
     }
