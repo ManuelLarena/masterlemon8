@@ -16,7 +16,7 @@ console.log("************** DELIVERABLE 05 *********************");
 // "Congratulations!!!. You won <número de monedas> coins!!"
 
 // y reiniciar las monedas almacenadas, ya que las hemos conseguido
-//y han salido de la máquina.
+// y han salido de la máquina.
 // En caso contrario deberá mostrar otro mensaje:
 
 // "Good luck next time!!".
