@@ -1,0 +1,10 @@
+$background: indigo;
+$color: #ffffff;
+
+.title {
+    background-color: $background;
+    color: $color;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    text-align: center;
+}
