@@ -31,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
   table: {
     tableLayout: 'fixed',
   },
+  head: {
+    backgroundColor: theme.palette.info.main,
+    color: theme.palette.common.white,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
   large: {
     display: 'inline-flex',
     width: theme.spacing(7),
@@ -50,19 +56,18 @@ export const App = () => {
     fetch(`https://api.github.com/orgs/${organization}/members`)
       .then((response) => response.json())
       .then((json) => setMembers(json));
-
-      console.log('cargo')
   }, [organization]);
 
   const HeadComponent: React.FC = () => {
     return (
-      <>
+      <div className={classes.filter}>
         <TextField
           id="standard-basic"
           label="Organization"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className={classes.formControl}
+          autoFocus={true}
         />
         <Button
           variant="contained"
@@ -72,26 +77,22 @@ export const App = () => {
         >
           Search
         </Button>
-      </>
+      </div>
     );
   };
-
-  const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.info.main,
-      color: theme.palette.common.white,
-      fontSize: 14,
-      fontWeight: 'bold',
-    },
-    body: {},
-  }))(TableCell);
 
   const EmployeeTableHeader: React.FC = () => {
     return (
       <TableRow>
-        <StyledTableCell align="center">Avatar</StyledTableCell>
-        <StyledTableCell align="center">Id</StyledTableCell>
-        <StyledTableCell align="center">Name</StyledTableCell>
+        <TableCell className={classes.head} align="center">
+          Avatar
+        </TableCell>
+        <TableCell className={classes.head} align="center">
+          Id
+        </TableCell>
+        <TableCell className={classes.head} align="center">
+          Name
+        </TableCell>
       </TableRow>
     );
   };
@@ -123,6 +124,22 @@ export const App = () => {
     );
   };
 
+  interface TableBodyProps {
+    members: Members[];
+  }
+
+  const EmployeeTableBody: React.FC<TableBodyProps> = ({ members }) => {
+    return (
+      <>
+        {members
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((member) => (
+            <EmployeeRowComponent key={member.id} member={member} />
+          ))}
+      </>
+    );
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -137,20 +154,14 @@ export const App = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.filter}>
-        <HeadComponent />
-      </div>
+      <HeadComponent />
       <TableContainer>
         <Table className={classes.table}>
           <TableHead>
             <EmployeeTableHeader />
           </TableHead>
           <TableBody>
-            {members
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((member) => (
-                <EmployeeRowComponent key={member.id} member={member} />
-              ))}
+            <EmployeeTableBody members={members} />
             {emptyRows > 0 && (
               <TableRow style={{ height: 94 * emptyRows }}>
                 <TableCell colSpan={3} />
