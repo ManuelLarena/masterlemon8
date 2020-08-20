@@ -58,7 +58,7 @@ export const App = () => {
       .then((json) => setMembers(json));
   }, [organization]);
 
-  const HeadComponent: React.FC = () => {
+  const SelectOrganization: React.FC = () => {
     return (
       <div className={classes.filter}>
         <TextField
@@ -154,7 +154,7 @@ export const App = () => {
 
   return (
     <div className={classes.root}>
-      <HeadComponent />
+      <SelectOrganization />
       <TableContainer>
         <Table className={classes.table}>
           <TableHead>
