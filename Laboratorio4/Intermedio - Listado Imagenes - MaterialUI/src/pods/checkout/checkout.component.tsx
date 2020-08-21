@@ -16,7 +16,6 @@ interface Props {
   shoppingCart: Selection[]; 
   onBack: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   toBuy: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  changeFormat: (num: number) => string;
   subtotal: number;
   TAXRATE: number;
   total: number;
@@ -27,13 +26,14 @@ export const CheckoutComponent: React.FC<Props> = ({
   shoppingCart,
   onBack,
   toBuy,
-  changeFormat,
   subtotal,
   TAXRATE,
   taxes,
   total
 }) => {
   const classes = useStyles();
+
+  const ccyFormat = (num: number): string => `${num.toFixed(2)}`;
 
   return (
     <>
@@ -57,7 +57,7 @@ export const CheckoutComponent: React.FC<Props> = ({
                   {row.title}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {changeFormat(row.price)}€
+                  {ccyFormat(row.price)}€
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -67,20 +67,20 @@ export const CheckoutComponent: React.FC<Props> = ({
               <TableCell colSpan={2} className={classes.tableFooter}>
                 Subtotal
               </TableCell>
-              <TableCell align="right">{changeFormat(subtotal)}€</TableCell>
+              <TableCell align="right">{ccyFormat(subtotal)}€</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.tableFooter}>Tax</TableCell>
               <TableCell align="right">{`${(TAXRATE * 100).toFixed(
                 0
               )} %`}</TableCell>
-              <TableCell align="right">{changeFormat(taxes)}€</TableCell>
+              <TableCell align="right">{ccyFormat(taxes)}€</TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={2} className={classes.tableFooter}>
                 Total
               </TableCell>
-              <TableCell align="right">{changeFormat(total)}€</TableCell>
+              <TableCell align="right">{ccyFormat(total)}€</TableCell>
             </TableRow>
           </TableBody>
         </Table>

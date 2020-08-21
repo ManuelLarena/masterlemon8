@@ -12,8 +12,6 @@ export const CheckoutContainer: React.FunctionComponent = () => {
   const subtotal = (items: Selection[]): number =>
     items.reduce((sum, item) => sum + item.price, 0);
 
-  const ccyFormat = (num: number): string => `${num.toFixed(2)}`;
-
   const invoiceSubtotal: number = subtotal(shoppingCartContext.selection);
   const invoiceTaxes: number = TAX_RATE * invoiceSubtotal;
   const invoiceTotal: number = invoiceTaxes + invoiceSubtotal;
@@ -34,7 +32,6 @@ export const CheckoutContainer: React.FunctionComponent = () => {
         shoppingCart={shoppingCartContext.selection}
         onBack={handleBack}
         toBuy={handleCheckOut}
-        changeFormat={ccyFormat}
         subtotal={invoiceSubtotal}
         TAXRATE={TAX_RATE}
         taxes={invoiceTaxes}
