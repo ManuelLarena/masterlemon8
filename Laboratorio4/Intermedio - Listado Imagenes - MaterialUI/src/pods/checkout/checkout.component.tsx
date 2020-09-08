@@ -13,7 +13,7 @@ import { StyledTableCell, StyledTableRow, useStyles } from './checkout.styles';
 import { Selection } from 'core/shopping-cart.context';
 
 interface Props {
-  shoppingCart: Selection[]; 
+  shoppingCart: Selection[];
   onBack: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   toBuy: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   subtotal: number;
@@ -21,6 +21,8 @@ interface Props {
   total: number;
   taxes: number;
 }
+
+const ccyFormat = (num: number): string => `${num.toFixed(2)}`;
 
 export const CheckoutComponent: React.FC<Props> = ({
   shoppingCart,
@@ -32,8 +34,6 @@ export const CheckoutComponent: React.FC<Props> = ({
   total
 }) => {
   const classes = useStyles();
-
-  const ccyFormat = (num: number): string => `${num.toFixed(2)}`;
 
   return (
     <>

@@ -4,7 +4,7 @@ import { ShoppingCartContext, Selection } from 'core/shopping-cart.context';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 
-export const CheckoutContainer: React.FunctionComponent = () => {
+export const CheckoutContainer: React.FC = () => {
   const history = useHistory();
   const TAX_RATE: number = 0.21;
   const shoppingCartContext = React.useContext(ShoppingCartContext);
