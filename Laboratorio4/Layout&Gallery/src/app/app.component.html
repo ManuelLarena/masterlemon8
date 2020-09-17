@@ -1,0 +1,4 @@
+<app-public-header *ngIf="!isLogged()"></app-public-header>
+<app-private-header *ngIf="isLogged()"></app-private-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

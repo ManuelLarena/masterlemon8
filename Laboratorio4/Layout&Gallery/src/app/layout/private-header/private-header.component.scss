@@ -1,0 +1,17 @@
+.img-logo {
+  width: auto;
+  height: 3rem;
+  padding-right: 1rem;
+}
+
+.username {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 1rem;
+  margin: 0 1rem 0 auto;
+
+  .icon {
+    margin-right: 0.5rem;
+  }
+}

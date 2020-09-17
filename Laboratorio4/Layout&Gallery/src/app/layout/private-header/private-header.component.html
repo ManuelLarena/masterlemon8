@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <img src="./assets/logo_2.png" class="img-logo" alt="LemonCode logo" />
+  <app-private-menu></app-private-menu>
+  <p class="username">
+    <mat-icon aria-hidden="false" aria-label="user icon" class="icon">
+      account_circle
+    </mat-icon>
+    {{ getUsername() }}
+  </p>
+  <button
+    mat-flat-button
+    type="submit"
+    color="accent"
+    (click)="logout()"
+  >
+    Logout
+  </button>
+</mat-toolbar>

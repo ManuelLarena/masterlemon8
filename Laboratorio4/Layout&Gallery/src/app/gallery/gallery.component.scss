@@ -1,0 +1,50 @@
+h1 {
+  text-align: center;
+}
+
+.gallery-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .selected-img {
+  }
+  .button-wrapper {
+    mat-toolbar {
+      width: calc(100% + 16px);
+      margin: 0 -8px;
+      padding: 0 10px;
+
+      button {
+        margin: 0 8px;
+      }
+    }
+  }
+  .img-list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      flex: 0 0 auto;
+    }
+
+    .img-gallery {
+      flex: 0 1 auto;
+      width: auto;
+
+      .small-img {
+        display: block;
+        width: 80px;
+        cursor: pointer;
+
+        &.active {
+          // border-bottom: 3px solid #f44336;
+          box-shadow: 0 3px 0 0 #f44336;
+        }
+      }
+    }
+  }
+}

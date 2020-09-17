@@ -1,0 +1,63 @@
+<h1>Galería</h1>
+<div class="gallery-container">
+  <img
+    class="selected-img"
+    [src]="selectedImg.src"
+    [alt]="selectedImg.title"
+    [width]="imgWidth"
+  />
+  <div class="button-wrapper">
+    <mat-toolbar>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="getPrevImg()"
+        [disabled]="isFirstImg(indexGallery)"
+      >
+        Anterior
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="getNextImg()"
+        [disabled]="isLastImg(indexGallery)"
+      >
+        Siguiente
+      </button>
+      <button mat-flat-button color="accent" (click)="getGrowImg()">
+        Aumentar
+      </button>
+      <button mat-flat-button color="accent" (click)="getReduceImg()">
+        Disminuir
+      </button>
+      <button mat-flat-button color="warn" (click)="play($event)">Play</button>
+    </mat-toolbar>
+  </div>
+  <div class="img-list">
+    <button
+      mat-icon-button
+      aria-label="Anterior"
+      (click)="getPrevGallery()"
+      [disabled]="isFirstGallery"
+    >
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <div class="img-gallery" *ngFor="let img of gallery | slice: start:end">
+      <img
+        class="small-img"
+        [class.active]="isActive(img)"
+        [src]="img.src"
+        [alt]="img.title"
+        (click)="selectedSmallImg(img)"
+      />
+    </div>
+    <button
+      mat-icon-button
+      aria-label="Siguiente"
+      (click)="getNextGallery()"
+      [disabled]="isLastGallery"
+    >
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>
