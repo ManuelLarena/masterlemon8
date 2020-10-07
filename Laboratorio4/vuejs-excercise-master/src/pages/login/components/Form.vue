@@ -15,14 +15,16 @@
       @input="(password) => updateLogin('password', password)"
       @blur="() => updateLogin('password', login.password)"
     />
-    <v-btn type="submit" color="info" @click.prevent="handleOnClick">Login</v-btn>
+    <v-btn type="submit" color="info" @click.prevent="handleOnClick()"
+      >Login</v-btn
+    >
   </v-form>
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions, VueConstructor } from "vue";
-import { FormProps } from "../formProps";
-import { ResultLoginError } from "../viewModel";
+import Vue, { PropOptions, VueConstructor } from 'vue';
+import { FormProps } from '../formProps';
+import { ResultLoginError } from '../viewModel';
 
 interface Refs {
   $refs: {
@@ -31,7 +33,7 @@ interface Refs {
 }
 
 export default (Vue as VueConstructor<Vue & Refs>).extend({
-  name: "FormComponent",
+  name: 'FormComponent',
   props: {
     login: { required: true },
     loginError: { required: true },
@@ -58,9 +60,9 @@ export default (Vue as VueConstructor<Vue & Refs>).extend({
   },
   methods: {
     handleOnClick() {
-      this.$refs.form.validate();
-      // Comprobar si la validación del formulario es correcta antes de ejecutar loginRequest
-      this.loginRequest();
+      if (this.$refs.form.validate()) {
+        this.loginRequest();
+      }
     },
   },
 });

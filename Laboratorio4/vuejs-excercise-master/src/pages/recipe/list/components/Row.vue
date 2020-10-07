@@ -1,51 +1,55 @@
 <template>
   <tr>
-    <td :class="$style.name">
-      <span>{{ recipe.name }}</span>
+    <td class="name">
+      {{ recipe.name }}
     </td>
-    <td :class="$style.description">
+    <td class="description">
       <span>{{ recipe.description }}</span>
     </td>
-    <td :class="$style.editButton">
+    <td class="edit-button">
       <v-btn text icon :to="routeEdit">
         <v-icon>edit</v-icon>
+      </v-btn>
+      <v-btn text icon @click="() => onRemoveRecipe(recipe.id)">
+        <v-icon>delete</v-icon>
       </v-btn>
     </td>
   </tr>
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from "vue";
-import { baseRoutes } from "../../../../router";
-import { Recipe } from "../viewModel";
+import Vue, { PropOptions } from 'vue';
+import { baseRoutes } from '../../../../router';
+import { Recipe } from '../viewModel';
 
 export default Vue.extend({
-  name: "RowComponent",
+  name: 'RowComponent',
   props: {
     recipe: { required: true } as PropOptions<Recipe>,
+    onRemoveRecipe: { required: true } as PropOptions<(value: number) => void>,
   },
   computed: {
     routeEdit(): string {
       return `${baseRoutes.recipe}/${this.recipe.id}`;
-    }
+    },
   },
 });
 </script>
 
-<style module>
+<style scoped>
 .name {
   width: 25%;
 }
 
 .description {
-  max-width: 177px;
+  max-width: 480px;
 }
 
 .description span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 

@@ -1,5 +1,5 @@
-import { Recipe } from "../../model";
-import { mockRecipes } from "./mockData";
+import { Recipe } from '../../model';
+import { mockRecipes } from './mockData';
 
 let recipes = mockRecipes;
 
@@ -15,11 +15,22 @@ export const fetchRecipeById = (id: number): Promise<Recipe> => {
 export const save = (recipe: Recipe): Promise<string> => {
   const index = recipes.findIndex((r) => r.id === recipe.id);
 
-  return index >= 0 ? saveRecipeByIndex(index, recipe) : Promise.reject("Something was wrong saving recipe :(");
+  // return index >= 0 ? saveRecipeByIndex(index, recipe) : Promise.reject("Something was wrong saving recipe :(");
+  return index >= 0 ? saveRecipeByIndex(index, recipe) : addRecipe(recipe);
 };
 
 const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
   recipes = [...recipes.slice(0, index), recipe, ...recipes.slice(index + 1)];
 
-  return Promise.resolve("Save recipe success");
+  return Promise.resolve('Save recipe success');
+};
+
+const addRecipe = (newRecipe: Recipe): Promise<string> => {
+  let id = recipes.length;
+  const index = recipes.length;
+  console.log(recipes);
+  recipes = [ ...recipes, { ...newRecipe, id: ++id }];
+  console.log(recipes);
+
+  return Promise.resolve('Add recipe success');
 };

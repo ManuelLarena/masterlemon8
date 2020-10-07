@@ -8,9 +8,16 @@
     "sourceMap": true,
     "noLib": false,
     "suppressImplicitAnyIndexErrors": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./src/",
+    "paths": {
+      "assets": ["assets"],
+      "common": ["common"],
+      "pages": ["pages"],
+      "rest-api": ["rest-api"]
+    }
   },
   "compileOnSave": false,
-  "include": ["src/**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }
