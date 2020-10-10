@@ -1,5 +1,11 @@
 <template>
-  <v-snackbar v-model="snackbar" :timeout="timeout" :color="snackbarColor" absolute top>
+  <v-snackbar
+    v-model="snackbar"
+    :timeout="timeout"
+    :color="snackbarColor"
+    absolute
+    top
+  >
     {{ snackbarText }}
     <template v-slot:action="{ attrs }">
       <template v-if="isVisible">

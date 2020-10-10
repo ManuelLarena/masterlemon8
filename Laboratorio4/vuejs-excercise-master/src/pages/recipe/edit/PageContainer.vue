@@ -19,13 +19,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-// import VueRouter from 'vue-router'
 import RecipeEditPage from './Page.vue';
 import { fetchRecipeById, save } from '../../../rest-api/api/recipe';
 import { mapRecipeModelToVm, mapRecipeVmToModel } from './mapper';
 import { createEmptyRecipe, createEmptyRecipeError } from './viewModel';
 import { validations, validationsIngredient } from './validations';
-// import { baseRoutes, BaseRoutes, router,  } from '../../../router';
 
 export default Vue.extend({
   name: 'RecipeEditPageContainer',
@@ -43,7 +41,6 @@ export default Vue.extend({
     };
   },
   mounted() {
-    console.log(this.isEditMode);
     if (this.isEditMode) {
       const id = Number(this.id || 0);
       fetchRecipeById(id)
@@ -58,7 +55,6 @@ export default Vue.extend({
     } else {
       this.recipe = createEmptyRecipe();
       this.recipeError = createEmptyRecipeError();
-      console.log(this.recipe);
     }
   },
   methods: {
@@ -83,12 +79,8 @@ export default Vue.extend({
               this.snackbar = true;
               this.snackbarColor = 'error';
               this.snackbarText = error;
-              console.log(error);
             });
         } else {
-          this.snackbar = true;
-          this.snackbarColor = 'error';
-          this.snackbarText = 'Please fill in all the required fields';
           this.recipeError = {
             ...this.recipeError,
             ...result.fieldErrors,
@@ -96,18 +88,15 @@ export default Vue.extend({
         }
       });
     },
-    onAddIngredient(ingredient: string) {
-      if (ingredient) {
-        console.log('existo');
+    onAddIngredient(ingredient: string, ingredients: string[]) {
+      if (ingredient && ingredients.every((item: string): boolean => item !== ingredient)) {
         this.recipe = {
           ...this.recipe,
-          ingredients: [...this.recipe.ingredients, ingredient],
+          ingredients: [...ingredients, ingredient],
         };
-      } else {
-        this.validateIngredientField('ingredient', ingredient);
       }
-      console.log(this.validateIngredientField('ingredient', ingredient));
-      this.validateRecipeField('ingredients', this.recipe.ingredients);
+      this.validateIngredientField('ingredient', ingredient, ingredients);
+      this.validateRecipeField('ingredients', ingredients);
     },
     onRemoveIngredient(ingredient: string) {
       this.recipe = {
@@ -123,9 +112,9 @@ export default Vue.extend({
         .validateField(field, value)
         .then((result) => this.updateRecipeError(field, result));
     },
-    validateIngredientField(field, value) {
+    validateIngredientField(field, value, values) {
       validationsIngredient
-        .validateField(field, value)
+        .validateField(field, value, values)
         .then((result) => this.updateRecipeError(field, result));
     },
     updateRecipeError(field, result) {

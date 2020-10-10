@@ -22,7 +22,7 @@
       :rules="[resultRecipeError.ingredient]"
       @keyup="(ingredient) => onUpdateRecipe('ingredient', ingredient)"
       @blur="(ingredient) => onUpdateRecipe('ingredient', ingredient)"
-      @click:append.prevent="onAddIngredient(ingredient)"
+      @click:append.prevent="onAddIngredient(ingredient, recipe.ingredients)"
     />
 
     <ingredient-list-component
@@ -36,6 +36,7 @@
       outlined
       >{{ recipeError.ingredients.message }}</v-alert
     > -->
+    
     <snackbar
       :snackbar="!recipeError.ingredients.succeeded"
       :snackbarColor="snackbarColor"
@@ -58,11 +59,9 @@
     <v-btn type="button" color="success" @click.prevent="handleOnSave()"
       >Save</v-btn
     >
-    <template v-if="!this.isEditMode">
-      <v-btn type="button" color="warning" @click.prevent="handleOnCancel()">
-        Cancel
-      </v-btn>
-    </template>
+    <v-btn type="button" color="warning" @click.prevent="handleOnCancel()">
+      Cancel
+    </v-btn>
   </v-form>
 </template>
 
@@ -97,6 +96,7 @@ export default (Vue as VueConstructor<Vue & Refs>).extend({
   } as FormProps,
   data() {
     return {
+      ingredients: [],
       ingredient: '',
       valid: true,
     };

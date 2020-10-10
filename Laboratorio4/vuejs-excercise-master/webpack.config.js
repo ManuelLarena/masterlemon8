@@ -100,26 +100,26 @@ module.exports = (env, argv) => {
           test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file-loader',
         },
-        // {
-        //   test: /\.(png|jpg|gif|svg)$/,
-        //   loader: 'file-loader',
-        //   options: {
-        //     name: '[name].[ext]',
-        //     esModule: false,
-        //   },
-        // },
         {
-          test: /\.(png|jpg)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'url-loader',
-            options: {
-              limit: 5000,
-              esModule: false,
-              name: '[hash].[name].[ext]',
-            },
+          test: /\.(png|jpg|gif|svg)$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            esModule: false,
           },
         },
+        // {
+        //   test: /\.(png|jpg)$/,
+        //   exclude: /node_modules/,
+        //   use: {
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 5000,
+        //       esModule: false,
+        //       name: '[hash].[name].[ext]',
+        //     },
+        //   },
+        // },
       ],
     },
     devtool: isDev ? 'inline-source-map' : 'none',

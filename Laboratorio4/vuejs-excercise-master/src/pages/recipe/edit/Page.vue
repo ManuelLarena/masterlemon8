@@ -10,8 +10,8 @@
       ></snackbar>
       <template v-if="isEditMode">
         <v-img
-          :lazy-src="require(`assets/${this.recipe.image}`)"
-          :src="require(`assets/${this.recipe.image}`)"
+          :lazy-src="`${this.recipe.image}`"
+          :src="`${this.recipe.image}`"
           width="100%"
           height="90px"
         ></v-img>
@@ -45,15 +45,5 @@ export default Vue.extend({
     isVisible: { require: true },
     isEditMode: { require: true },
   } as FormProps,
-  // data() {
-  //   return {
-  //     urlImage: require(`assets/${this.recipe.image}`),
-  //   };
-  // },
-  // computed: {
-  //   urlImage(): string {
-  //     return require(`assets/${this.recipe.image}`);
-  //   },
-  // },
 });
 </script>

@@ -3,7 +3,7 @@ import {
   Validators,
   ValidationSchema,
 } from '@lemoncode/fonk';
-import { hasItems } from 'common/validations/hasItems';
+import { hasItems, newIngedientValidator } from 'common/validations/index';
 
 const validationSchema: ValidationSchema = {
   field: {
@@ -19,7 +19,10 @@ const validationIngredientSchema: ValidationSchema = {
     ingredient: [
       {
         validator: Validators.required,
-        message: 'You can not add empty ingredients',
+        message: 'Please fill in this field, no empty field',
+      },
+      {
+        validator: newIngedientValidator
       },
     ],
   },

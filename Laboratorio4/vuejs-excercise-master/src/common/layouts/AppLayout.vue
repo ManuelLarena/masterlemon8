@@ -3,10 +3,9 @@
     <v-app-bar app dark color="amber">
       <v-toolbar-title>Recipe App</v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-icon>account_circle</v-icon>
       <v-toolbar-title>{{ getUsername }}</v-toolbar-title>
       <v-btn icon large @click="logout">
-        <v-icon>exit_to_app</v-icon>
+        <v-icon large>exit_to_app</v-icon>
       </v-btn>
     </v-app-bar>
     <v-container class="py-10">
@@ -32,10 +31,6 @@ export default Vue.extend({
       localStorage.removeItem('token');
       this.$router.push(baseRoutes.login);
     },
-
-    // isLogged(): boolean {
-    //   return localStorage.getItem('token') ? true : false;
-    // },
   },
 });
 </script>

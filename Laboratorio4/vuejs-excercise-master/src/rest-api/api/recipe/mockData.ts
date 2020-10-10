@@ -4,7 +4,7 @@ export const mockRecipes: Recipe[] = [
   {
     id: 1,
     name: 'Omelette',
-    image: 'omelette.jpg',
+    image: require('assets/omelette.jpg'),
     description: `
      1. For a basic omelette, crack the eggs into a mixing bowl with a pinch of sea salt and black pepper. Beat well with a fork.
      2. Heat a small knob of butter in a small frying pan on a low heat, and once melted and bubbling, add the eggs and move the pan around to spread them out evenly.
@@ -16,7 +16,7 @@ export const mockRecipes: Recipe[] = [
   {
     id: 2,
     name: 'Salad with tomatoes',
-    image: 'salad.jpg',
+    image: require('assets/salad.jpg'),
     description: `
      1. Combine salad, tomatoes, avocados, garlic and onion in a large bowl.
      2. Sprinkle with lemon juice, and season with salt and pepper.
@@ -36,7 +36,7 @@ export const mockRecipes: Recipe[] = [
   {
     id: 3,
     name: 'Spaghetti with tomato sauce',
-    image: 'spaghetti.jpg',
+    image: require('assets/spaghetti.jpg'),
     description: `
      1. Brown beef over medium heat. Drain off fat.
      2. In a large pot, combine beef, salt, oregano, pepper, garlic powder, onion flakes, diced tomatoes, tomato sauce, and mushrooms. Simmer at a low heat setting for 2 hours, stirring occasionally

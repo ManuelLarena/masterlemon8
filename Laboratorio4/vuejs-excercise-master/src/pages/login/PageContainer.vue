@@ -56,12 +56,12 @@ export default Vue.extend({
           const loginModel = mapLoginVMToModel(this.login);
           loginRequest(loginModel)
             .then(() => {
-              this.$router.push(baseRoutes.recipe);
               localStorage.setItem('username', loginModel.name);
               localStorage.setItem(
                 'token',
                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OCIsIm5hbWUiOiJtYXN0ZXI4QGxlbW9uY29kZS5uZXQiLCJpYXQiOjE1MTYyMzkwMjJ9.5yh0NKIFuNv9XBNQGpDbBaM0rBVBPOs2n9KlHzdfME0'
               );
+              this.$router.push(baseRoutes.recipe);
             })
             .catch((error) => {
               this.snackbar = true;
@@ -69,9 +69,6 @@ export default Vue.extend({
               this.snackbarText = error;
             });
         } else {
-          // this.snackbar = true;
-          // this.snackbarColor = 'warning';
-          // this.snackbarText = 'Please fill in this mandatory field';
           this.loginError = {
             ...this.loginError,
             ...result.fieldErrors,

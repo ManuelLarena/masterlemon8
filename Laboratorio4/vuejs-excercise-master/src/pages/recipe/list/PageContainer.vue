@@ -36,10 +36,10 @@ export default Vue.extend({
       .catch((error) => console.log(error));
   },
   methods: {
-    // ELIMINAR UNA RECETA - BORRAR
     onRemoveRecipe(id: number) {
       this.recipes = this.recipes.filter((item) => item.id !== id);
     },
+    
     onSearch(value: string) {
       this.searchText = value;
     },
