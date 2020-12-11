@@ -1,0 +1,49 @@
+import * as React from 'react';
+import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar/Avatar';
+import IconButton from '@material-ui/core/IconButton/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { LocationEntityVm } from '../location-collection.vm';
+import * as classes from './location-card.styles';
+
+interface Props {
+  location: LocationEntityVm;
+}
+
+export const LocationCard: React.FunctionComponent<Props> = (props) => {
+  const { location } = props;
+
+  return (
+    <Card>
+      <CardHeader
+        title={location.name}
+        subheader={location.type}
+      />
+      <CardContent>
+        <div className={classes.content}>
+          <Typography variant="subtitle2" align="left" color="textSecondary">
+            {location.created}
+          </Typography>
+          <Typography variant="subtitle1" align="left" color="textPrimary">
+            {location.dimension}
+          </Typography>
+        </div>
+      </CardContent>
+      {/* <CardActions>
+        <IconButton onClick={() => onEdit(character.id)}>
+          <EditIcon />
+        </IconButton>
+        <IconButton onClick={() => onDelete(character.id)}>
+          <DeleteIcon />
+        </IconButton>
+      </CardActions> */}
+    </Card>
+  );
+};
