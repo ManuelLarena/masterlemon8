@@ -35,9 +35,9 @@ export const EpisodeCollectionContainer: React.FC = () => {
     loadSearchEpisodeCollection(name);
   }, [name]);
 
-  const handleReview = (id: string) => {
-    history.push(linkRoutes.editCharacter(id));
-  };
+  // const handleReview = (id: string) => {
+  //   history.push(linkRoutes.editCharacter(id));
+  // };
 
   const handleSearchLocationCollection = () => {
     const nameValue = (document.getElementById(
@@ -59,7 +59,6 @@ export const EpisodeCollectionContainer: React.FC = () => {
       onPrevPage={handlePrevPage}
       onNextPage={handleNextPage}
       onSearch={handleSearchLocationCollection}
-      onReview={handleReview}
     />
   );
 };

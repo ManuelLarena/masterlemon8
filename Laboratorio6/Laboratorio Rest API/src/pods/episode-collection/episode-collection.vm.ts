@@ -3,14 +3,8 @@ export interface EpisodeEntityVm {
   name: string;
   airDate: string;
   episode: string;
-  charactersUrl: string[];
+  characters: CharacterEntityVm[];
   created: string;
-}
-
-export interface CharacterEntityVm {
-  id: string;
-  name: string;
-  picture: string;
 }
 
 export interface InfoEntityVm {
@@ -19,18 +13,9 @@ export interface InfoEntityVm {
   prev: string;
 }
 
-export const createEmptyEpisodeEntity = (): EpisodeEntityVm => ({
-  id: '',
-  name: '',
-  airDate: '',
-  episode: '',
-  charactersUrl: [],
-  created: '',
-});
-
-export const createEmptyCharacterEntity = (): CharacterEntityVm => ({
-  id: '',
-  name: '',
-  picture: '',
-});
+export interface CharacterEntityVm {
+  id: string;
+  name: string;
+  picture: string;
+}
 

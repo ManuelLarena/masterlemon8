@@ -1,10 +1,45 @@
 import Axios from 'axios';
+import { gql } from 'graphql-request';
+import { graphqlClient } from 'core/api';
 import {
-  ResultsEntityApi,
+  CharacterEntityApi,
 } from './character-collection.api-model';
 
 const url = `${process.env.BASE_API_URL}/character/`;
 const characterListUrl = '/api/characters';
+
+interface GetCharacterCollectionResponse {
+  characters: CharacterEntityApi;
+}
+
+export const getCharacterCollectionPage = async (
+  page: number
+): Promise<CharacterEntityApi> => {
+  const query = gql`
+    query {
+      characters(page: ${page}) {
+        info {
+          pages
+        }
+        results {
+          id
+          image
+          name
+          species
+          gender
+          status
+          created
+        }
+      }
+    }
+  `;
+
+  const {
+    characters,
+  } = await graphqlClient.request<GetCharacterCollectionResponse>(query);
+
+  return characters;
+};
 
 export const deleteCharacter = async (id: string): Promise<boolean> => {
   // Axios
@@ -19,9 +54,29 @@ export const deleteCharacter = async (id: string): Promise<boolean> => {
 
 export const getSearchCharacterCollection = async (
   name: string
-): Promise<ResultsEntityApi[]> => {
-  const { data } = await Axios.get(`${url}/?name=${name}`);
-  const result: ResultsEntityApi[] = data.results;
+): Promise<CharacterEntityApi> => {
+  const query = gql`
+    query {
+      characters(filter: {name: "${name}"}) {
+        info{
+          pages
+        }
+        results {
+          id
+          image
+          name
+          species
+          gender
+          status
+          created
+        }
+      }
+    }
+  `;
 
-  return result;
+  const {
+    characters,
+  } = await graphqlClient.request<GetCharacterCollectionResponse>(query);
+
+  return characters;
 };

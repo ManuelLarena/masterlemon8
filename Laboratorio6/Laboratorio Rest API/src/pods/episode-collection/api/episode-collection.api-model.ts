@@ -11,32 +11,17 @@ export interface InfoEntityApi {
 }
 
 export interface ResultsEntityApi {
-  id: number;
+  id: string;
   name: string;
   air_date: string;
   episode: string;
-  characters: string[];
+  characters: CharacterEntityApi[];
   url: string;
   created: string;
 }
 
 export interface CharacterEntityApi {
-  id: number;
+  id: string;
   name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
+  image: string
 }

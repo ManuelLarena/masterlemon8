@@ -18,7 +18,6 @@ interface Props {
   onPrevPage: () => void;
   onNextPage: () => void;
   onSearch: () => void;
-  onReview: (id: string) => void;
 }
 
 export const EpisodeCollectionComponent: React.FunctionComponent<Props> = (
@@ -35,7 +34,6 @@ export const EpisodeCollectionComponent: React.FunctionComponent<Props> = (
     onNextPage,
     onPrevPage,
     onSearch,
-    onReview,
   } = props;
 
   return (
@@ -56,7 +54,7 @@ export const EpisodeCollectionComponent: React.FunctionComponent<Props> = (
       <ul className={classes.list}>
         {episodeCollection.map((episode) => (
           <li key={episode.id}>
-            <EpisodeCard episode={episode} onReview={onReview} />
+            <EpisodeCard episode={episode} />
           </li>
         ))}
       </ul>

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { CharacterEntityVm } from './character-collection.vm';
 import {
+  getCharacterCollectionPage,
   getSearchCharacterCollection,
 } from './api';
-import {
-  getRickAndMortyCollection,
-} from 'core/api';
 import { mapCharacterFromApiToVm } from './character-collection.mapper';
 import { mapToCollection } from 'common/mappers';
 
@@ -16,29 +14,28 @@ export const useCharacterCollection = () => {
   const [totalPages, setTotalPages] = React.useState<number>(0);
 
   const loadCharacterCollection = (page: number) => {
-    getRickAndMortyCollection.then((response) => {
-      const getCharacterCollectionPage = response.getCharacterCollection;
-      getCharacterCollectionPage(page)
-        .then((result) => {
-          const { info, results } = result;
-          setTotalPages(info.pages);
-          setCharacterCollection(
-            mapToCollection(results, mapCharacterFromApiToVm)
-          );
-        })
-        .catch((error) => {
-          console.error({ error });
-          // Informar al usuario
-          // TODO snackbar - material ui
-        });
-    });
+    getCharacterCollectionPage(page)
+      .then((result) => {
+        const { info, results } = result;
+        setTotalPages(info.pages);
+        setCharacterCollection(
+          mapToCollection(results, mapCharacterFromApiToVm)
+        );
+      })
+      .catch((error) => {
+        console.error({ error });
+        // Informar al usuario
+        // TODO snackbar - material ui
+      });
   };
 
   const loadSearchCharacterCollection = (name: string) => {
     getSearchCharacterCollection(name)
       .then((result) => {
+        const { info, results } = result;
+        setTotalPages(info.pages);
         setCharacterCollection(
-          mapToCollection(result, mapCharacterFromApiToVm)
+          mapToCollection(results, mapCharacterFromApiToVm)
         );
       })
       .catch((error) => {

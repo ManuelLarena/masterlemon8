@@ -1,27 +1,47 @@
 import Axios from 'axios';
+import { gql } from 'graphql-request';
+import { graphqlClient } from 'core/api';
 import { Character } from './character.api-model';
 
-const url = `${process.env.BASE_API_URL}/character`;
+// const url = `${process.env.BASE_API_URL}/character`;
 const characterListUrl = '/api/characters';
 
+interface GetCharacterResponse {
+  charactersByIds: Character;
+}
+
 export const getCharacter = async (id: string): Promise<Character> => {
-  const { data } = await Axios.get<Character>(`${url}/${id}`);
   const response = await Axios.get<Character>(`${characterListUrl}/${id}`);
+  const query = gql`
+    query {
+      charactersByIds(ids: "${id}") {
+        id
+        name
+        gender
+        species
+        status
+      }
+    }
+  `;
 
+  const { charactersByIds } = await graphqlClient.request<GetCharacterResponse>(
+    query
+  );
   const { comment } = response.data;
-  const dataComment: Character = {
-    ...data,
-    comment
-  }
 
-  console.log(dataComment);
+  console.log(charactersByIds);
+
+  const dataComment: Character = {
+    ...charactersByIds[0],
+    comment,
+  };
 
   return dataComment;
 };
 
 export const saveCharacter = async (character: Character): Promise<boolean> => {
   if (character.id) {
-    await Axios.put<Character>(
+    await Axios.patch<Character>(
       `${characterListUrl}/${character.id}`,
       character
     );
@@ -51,4 +71,3 @@ export const saveCharacter = async (character: Character): Promise<boolean> => {
   // }
   // return true;
 };
-

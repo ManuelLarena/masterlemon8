@@ -5,17 +5,18 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Link from '@material-ui/core/Link';
-import { EpisodeEntityVm } from '../episode-collection.vm';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import { EpisodeEntityVm } from './../episode-collection.vm';
 import * as classes from './episode-card.styles';
 
 interface Props {
   episode: EpisodeEntityVm;
-  onReview: (id: string) => void;
 }
 
 export const EpisodeCard: React.FunctionComponent<Props> = (props) => {
-  const { episode, onReview } = props;
+  const { episode } = props;
 
   return (
     <Card className={classes.card}>
@@ -32,14 +33,13 @@ export const EpisodeCard: React.FunctionComponent<Props> = (props) => {
             Characters:
           </Typography>
           <List dense>
-            {episode.charactersUrl.map((characterUrl) => {
-              const characterNum: string[] = characterUrl.split('/').reverse();
-              const [number, ...restElements] = characterNum;
+            {episode.characters.map((character) => {
               return (
-                <ListItem key={number}>
-                  <Link component="button" variant="body2" onClick={() => onReview(number)}>
-                    Personaje-{number}
-                  </Link>
+                <ListItem key={character.id}>
+                  <ListItemAvatar>
+                    <Avatar alt={character.name} src={character.picture} />
+                  </ListItemAvatar>
+                  <ListItemText id={character.id} primary={character.name} />
                 </ListItem>
               );
             })}
