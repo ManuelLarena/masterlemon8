@@ -1,37 +1,27 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import * as api from './api';
+import { saveCharacter } from './api';
+import { Character } from './character.vm';
 import {
-  createEmptyCharacter,
-  Character,
-} from './character.vm';
-import {
-  mapCharacterFromApiToVm,
   mapCharacterFromVmToApi,
 } from './character.mappers';
+import { useCharacter } from './character.hook';
 import { CharacterComponent } from './character.component';
 
 export const CharacterContainer: React.FunctionComponent = (props) => {
-  const [character, setCharacter] = React.useState<Character>(
-    createEmptyCharacter()
-  );
+  const { character, loadCharacter } = useCharacter();
   const { id } = useParams();
   const history = useHistory();
 
-  const handleLoadCharacter = async () => {
-    const apiCharacter = await api.getCharacter(id);
-    setCharacter(mapCharacterFromApiToVm(apiCharacter));
-  };
-
   React.useEffect(() => {
     if (id) {
-      handleLoadCharacter();
+      loadCharacter(id);
     }
-  }, []);
+  }, [id]);
 
   const handleSave = async (character: Character) => {
     const apiCharacter = mapCharacterFromVmToApi(character);
-    const successCharacter = await api.saveCharacter(apiCharacter);
+    const successCharacter = await saveCharacter(apiCharacter);
 
     if (successCharacter) {
       history.goBack();
@@ -40,10 +30,5 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     }
   };
 
-  return (
-    <CharacterComponent
-      character={character}
-      onSave={handleSave}
-    />
-  );
+  return <CharacterComponent character={character} onSave={handleSave} />;
 };
