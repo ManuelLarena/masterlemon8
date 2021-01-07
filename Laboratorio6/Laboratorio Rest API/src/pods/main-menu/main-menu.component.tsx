@@ -4,13 +4,13 @@ import {
   TabListComponent,
   TabPanelComponent,
 } from 'common/components';
-import { CharacterCollectionContainer } from './../character-collection/character-collection.container';
-import { EpisodeCollectionContainer } from './../episode-collection/episode-collection.container';
-import { LocationCollectionContainer } from './../location-collection/location-collection.container';
+import { CharacterCollectionContainer } from '../character-collection/character-collection.container';
+import { EpisodeCollectionContainer } from '../episode-collection/episode-collection.container';
+import { LocationCollectionContainer } from '../location-collection/location-collection.container';
 import AppBar from '@material-ui/core/AppBar';
-import * as classes from './rickandmorty.styles';
+import * as classes from './main-menu.styles';
 
-export const RickAndMortyComponent: React.FC = () => {
+export const MainMenuComponent: React.FC = () => {
   const [tab, setTab] = React.useState(0);
 
   return (

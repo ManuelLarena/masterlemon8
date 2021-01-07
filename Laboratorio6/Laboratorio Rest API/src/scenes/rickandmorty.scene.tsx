@@ -1,6 +1,6 @@
 import React from 'react';
-import { RickAndMortyContainer } from './../pods/rickandmorty/rickandmorty.container';
+import { MainMenuContainer } from '../pods/main-menu/main-menu.container';
 
 export const RickAndMortyScene: React.FunctionComponent = () => {
-  return <RickAndMortyContainer />;
+  return <MainMenuContainer />;
 };
