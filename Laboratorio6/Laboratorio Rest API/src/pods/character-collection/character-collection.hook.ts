@@ -13,36 +13,30 @@ export const useCharacterCollection = () => {
   >([]);
   const [totalPages, setTotalPages] = React.useState<number>(0);
 
-  const loadCharacterCollection = (page: number) => {
-    getCharacterCollectionPage(page)
-      .then((result) => {
-        const { info, results } = result;
-        setTotalPages(info.pages);
-        setCharacterCollection(
-          mapToCollection(results, mapCharacterFromApiToVm)
-        );
-      })
-      .catch((error) => {
-        console.error({ error });
-        // Informar al usuario
-        // TODO snackbar - material ui
-      });
+  const loadCharacterCollection = async (page: number) => {
+    try {
+      const response = await getCharacterCollectionPage(page);
+      const { info, results } = response;
+      setTotalPages(info.pages);
+      setCharacterCollection(mapToCollection(results, mapCharacterFromApiToVm));
+    } catch (error) {
+      console.error(error);
+      // Informar al usuario
+      // TODO snackbar - material ui
+    }
   };
 
-  const loadSearchCharacterCollection = (name: string) => {
-    getSearchCharacterCollection(name)
-      .then((result) => {
-        const { info, results } = result;
-        setTotalPages(info.pages);
-        setCharacterCollection(
-          mapToCollection(results, mapCharacterFromApiToVm)
-        );
-      })
-      .catch((error) => {
-        console.error({ error });
-        // Informar al usuario
-        // TODO snackbar - material ui
-      });
+  const loadSearchCharacterCollection = async (name: string) => {
+    try {
+      const response = await getSearchCharacterCollection(name);
+      const { info, results } = response;
+      setTotalPages(info.pages);
+      setCharacterCollection(mapToCollection(results, mapCharacterFromApiToVm));
+    } catch (error) {
+      console.error(error);
+      // Informar al usuario
+      // TODO snackbar - material ui
+    }
   };
 
   return {

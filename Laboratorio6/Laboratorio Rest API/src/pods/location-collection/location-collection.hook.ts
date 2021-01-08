@@ -10,32 +10,30 @@ export const useLocationCollection = () => {
   >([]);
   const [totalPages, setTotalPages] = React.useState<number>(0);
 
-  const loadLocationCollection = (page: number) => {
-    getLocationCollectionPage(page)
-      .then((result) => {
-        const { info, results } = result;
-        setTotalPages(info.pages);
-        setLocationCollection(mapToCollection(results, mapLocationFromApiToVm));
-      })
-      .catch((error) => {
-        console.error({ error });
-        // Informar al usuario
-        // TODO snackbar - material ui
-      });
+  const loadLocationCollection = async (page: number) => {
+    try {
+      const response = await getLocationCollectionPage(page);
+      const { info, results } = response;
+      setTotalPages(info.pages);
+      setLocationCollection(mapToCollection(results, mapLocationFromApiToVm));
+    } catch (error) {
+      console.error(error);
+      // Informar al usuario
+      // TODO snackbar - material ui
+    }
   };
 
-  const loadSearchLocationCollection = (name: string) => {
-    getSearchLocationCollection(name)
-      .then((result) => {
-        const { info, results } = result;
-        setTotalPages(info.pages);
-        setLocationCollection(mapToCollection(results, mapLocationFromApiToVm));
-      })
-      .catch((error) => {
-        console.error({ error });
-        // Informar al usuario
-        // TODO snackbar - material ui
-      });
+  const loadSearchLocationCollection = async (name: string) => {
+    try {
+      const response = await getSearchLocationCollection(name);
+      const { info, results } = response;
+      setTotalPages(info.pages);
+      setLocationCollection(mapToCollection(results, mapLocationFromApiToVm));
+    } catch (error) {
+      console.error(error);
+      // Informar al usuario
+      // TODO snackbar - material ui
+    }
   };
 
   return {

@@ -9,15 +9,12 @@ export const useCharacterCollection = () => {
   );
 
   const loadCharacter = async (id: string) => {
-    // const apiCharacter = await api.getCharacter(id);
-    // setCharacter(mapCharacterFromApiToVm(apiCharacter));
-    api.getCharacter(id)
-    .then((result) => {
-      setCharacter(mapCharacterFromApiToVm(result));
-    })
-    .catch((error) => {
-      console.error({error});
-    });
+    try {
+      const response = await api.getCharacter(id);
+      setCharacter(mapCharacterFromApiToVm(response));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return { character, loadCharacter };
